@@ -3,6 +3,8 @@ name = "audio-gate"
 authors = ["Charles R. Portwood II <charlesportwoodii@erianna.com>"]
 description = "A Simple Noise Gate"
 repository = "https://github.com/charlesportwoodii/audio-gate"
+license = "BSD-3-Clause"
+categories = ["audio", "multimedia"]
 version = "0.1.0"
 edition = "2021"
 
