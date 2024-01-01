@@ -3,7 +3,7 @@ name = "audio-gate"
 authors = ["Charles R. Portwood II <charlesportwoodii@erianna.com>"]
 description = "A Simple Noise Gate"
 repository = "https://github.com/charlesportwoodii/audio-gate"
-version = "0.0.1"
+version = "0.1.0"
 edition = "2021"
 
 [registries.crates-io]
@@ -15,4 +15,4 @@ anyhow = { version = "^1.0" }
 cpal = { git = "https://github.com/RustAudio/cpal.git" }
 serde = { version = "^1", features = ["derive"] }
 ringbuf = { version = "^0.3" }
-clap = { version = "4.0", features = ["derive"] }
+clap = { version = "^4.0", features = ["derive"] }
