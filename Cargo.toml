@@ -4,8 +4,9 @@ authors = ["Charles R. Portwood II <charlesportwoodii@erianna.com>"]
 description = "A Simple Noise Gate"
 repository = "https://github.com/charlesportwoodii/audio-gate"
 license = "BSD-3-Clause"
-categories = ["audio", "multimedia"]
-version = "0.1.0"
+categories = ["multimedia", "multimedia::audio"]
+keywords = ["audio-processing", "noise-gate", "audio-gate", "audio"]
+version = "0.1.1"
 edition = "2021"
 
 [registries.crates-io]
