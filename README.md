@@ -1,3 +1,7 @@
+![Crates.io Total Downloads](https://img.shields.io/crates/d/audio-gate)
+![Crates.io License](https://img.shields.io/crates/l/audio-gate)
+![Crates.io Version](https://img.shields.io/crates/v/audio-gate)
+
 <div align="center">
 <a href="https://www.erianna.com"><img src="https://raw.githubusercontent.com/charlesportwoodii/noise-gate/master/logo.png" width="140"/></a>
 
