@@ -1,8 +1,5 @@
 <div align="center">
-
-  <h1>Noise Gate</h1>
-
-    <a href="https://www.erianna.com"><img src="https://raw.githubusercontent.com/charlesportwoodii/noise-gate/master/logo.png" width="140"/></a>
+<a href="https://www.erianna.com"><img src="https://raw.githubusercontent.com/charlesportwoodii/noise-gate/master/logo.png" width="140"/></a>
 
   <p>
     <strong>A Simple Noise Gate for Rust</strong>
