@@ -10,6 +10,12 @@ use clap::Parser;
 use cpal::traits::{ DeviceTrait, HostTrait, StreamTrait };
 use ringbuf::HeapRb;
 use audio_gate::NoiseGate;
+use ringbuf::traits::{
+    Consumer,
+    Producer,
+    Split
+};
+
 
 #[derive(Parser, Debug)]
 #[command(version, about = "CPAL feedback example", long_about = None)]
@@ -51,7 +57,7 @@ fn main() -> anyhow::Result<()> {
     for _ in 0..latency_samples {
         // The ring buffer has twice as much space as necessary to add latency here,
         // so this should never fail
-        producer.push(0.0).unwrap();
+        producer.try_push(0.0).unwrap();
     }
 
     let mut gate = NoiseGate::new(-36.0, -54.0, 48000.0, 2, 150.0, 25.0, 150.0);
@@ -59,18 +65,18 @@ fn main() -> anyhow::Result<()> {
         if opt.with_gate {
             let gated_data = gate.process_frame(&data);
             for &sample in gated_data.as_slice() {
-                producer.push(sample).unwrap_or({});
+                producer.try_push(sample).unwrap_or({});
             }
         } else {
             for &sample in data {
-                producer.push(sample).unwrap_or({});
+                producer.try_push(sample).unwrap_or({});
             }
         }
     };
 
     let output_data_fn = move |data: &mut [f32], _: &cpal::OutputCallbackInfo| {
         for sample in data {
-            *sample = match consumer.pop() {
+            *sample = match consumer.try_pop() {
                 Some(s) => s,
                 None => { 0.0 }
             };
