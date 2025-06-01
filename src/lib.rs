@@ -68,6 +68,31 @@ impl NoiseGate {
         }
     }
 
+    pub fn update(
+        &mut self,
+        open_threshold: f32,
+        close_threshold: f32,
+        release_rate: f32,
+        attack_rate: f32,
+        hold_time: f32
+    ) {
+        let threshold_diff = open_threshold - close_threshold;
+        let min_decay_period = (1.0 / 75.0) * self.sample_rate;
+
+        self.open_threshold = match open_threshold.is_finite() {
+            true => (10_f32).powf(open_threshold / 20.0),
+            false => 0.0,
+        };
+        self.close_threshold = match close_threshold.is_finite() {
+            true => (10_f32).powf(close_threshold / 20.0),
+            false => 0.0,
+        };
+        self.release_rate = 1.0 / (release_rate * 0.001 * self.sample_rate);
+        self.attack_rate = 1.0 / (attack_rate * 0.001 * self.sample_rate);
+        self.decay_rate = threshold_diff / min_decay_period;
+        self.hold_time = hold_time * 0.001;
+    }
+
     /// Takes a frame and returns a new frame that has been attenuated by the gate
     pub fn process_frame(&mut self, frame: &[f32]) -> Vec<f32> {
         let mut channel_frames = Vec::<Vec<f32>>::new();

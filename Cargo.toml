@@ -6,16 +6,13 @@ repository = "https://github.com/charlesportwoodii/audio-gate"
 license = "BSD-3-Clause"
 categories = ["multimedia", "multimedia::audio"]
 keywords = ["audio-processing", "noise-gate", "audio-gate", "audio"]
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
-
-[registries.crates-io]
-protocol = "sparse"
 
 [dev-dependencies]
 tokio = { version = "^1.35", features = ["full"] }
 anyhow = { version = "^1.0" }
 cpal = { git = "https://github.com/RustAudio/cpal.git" }
 serde = { version = "^1", features = ["derive"] }
-ringbuf = { version = "^0.3" }
+ringbuf = { version = "^0.4" }
 clap = { version = "^4.0", features = ["derive"] }
