@@ -17,6 +17,8 @@ pub struct NoiseGate {
     close_threshold: f32,
     /// The sample rate in hz (eg 48000.0)
     sample_rate: f32,
+    /// The sample rate 1 / sample_rate
+    internal_sample_rate: f32,
     /// The relesae rate, in ms (eg 150)
     release_rate: f32,
     /// The attack rate in ms
@@ -55,7 +57,8 @@ impl NoiseGate {
                 true => (10_f32).powf(close_threshold / 20.0),
                 false => 0.0,
             },
-            sample_rate: 1.0 / sample_rate,
+            sample_rate: sample_rate,
+            internal_sample_rate: 1.0 / sample_rate,
             channels: channels,
             release_rate: 1.0 / (release_rate * 0.001 * sample_rate),
             attack_rate: 1.0 / (attack_rate * 0.001 * sample_rate),
@@ -129,7 +132,7 @@ impl NoiseGate {
             if self.is_open {
                 self.attenuation = f32::min(1.0, self.attenuation + self.attack_rate);
             } else {
-                self.held_time += self.sample_rate;
+                self.held_time += self.internal_sample_rate;
                 if self.held_time > self.hold_time {
                     self.attenuation = f32::max(0.0, self.attenuation - self.release_rate);
                 }
